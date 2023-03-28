@@ -1,0 +1,25 @@
+.outer-content {
+  background: transparent;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-content {
+  padding: 20px;
+  background: #fff;
+  width: 33%;
+}
+
+.register-form {
+  max-width: 100%;
+}
+
+.register-form-margin {
+  margin-bottom: 16px;
+}
+
+.register-form-button {
+  width: 100%;
+}

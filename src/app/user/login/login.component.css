@@ -1,0 +1,29 @@
+.outer-content {
+  background: transparent;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-content {
+  padding: 20px;
+  background: #fff;
+  width: 33%;
+}
+
+.login-form {
+  max-width: 100%;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+}

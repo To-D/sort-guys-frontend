@@ -1,0 +1,24 @@
+.inner-content {
+    padding: 20px;
+    background: #fff;
+    height: 100%;
+}
+
+.form {
+    max-width: 50%;
+    margin: 16px 0;
+}
+
+.form-margin {
+    margin-bottom: 16px;
+}
+
+.form-button {
+    width: 50%;
+}
+
+.list {}
+
+.content-span {
+    margin: 0 10px;
+}

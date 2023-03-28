@@ -1,0 +1,40 @@
+<nz-layout class="app-layout">
+    <nz-header class="menu-header" nzCollapsible nzBreakpoint="md">
+        <ul nz-menu nzTheme="dark" nzMode="horizontal" [nzInlineCollapsed]="isCollapsed">
+            <div class="logo">Sort Guys</div>
+            <li nz-menu-item [nzMatchRouter]="true" routerLink="/welcome">
+                <i nz-icon nzType="home"></i>首页
+            </li>
+
+            <li class="nav-right" nz-menu-item [nzMatchRouter]="true" routerLink="/user/login" *ngIf="!isLogin()">
+                <i nz-icon nzType="login"></i>登录
+            </li>
+            <li class="nav-right" nz-menu-item [nzMatchRouter]="true" routerLink="/user/register" *ngIf="!isLogin()">
+                <i nz-icon nzType="user-add"></i>注册
+            </li>
+            <li class="nav-right" nz-menu-item [nzMatchRouter]="true" (click)="logout()" *ngIf="isLogin()">
+                <i nz-icon nzType="logout"></i>登出
+            </li>
+            <li class="nav-right" nz-menu-item [nzMatchRouter]="true" routerLink="/user/settings" *ngIf="isLogin()">
+                <i nz-icon nzType="control"></i>后台
+            </li>
+            <div class="logo nav-right">
+                欢迎<span *ngIf="isLogin()">{{ username }}</span
+        >!
+      </div>
+    </ul>
+  </nz-header>
+  <nz-layout>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+<nz-modal
+  [(nzVisible)]="dialogVisible"
+  nzTitle="登出"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <ng-container *nzModalContent>确认登出吗？</ng-container>
+</nz-modal>

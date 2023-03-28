@@ -1,0 +1,37 @@
+<div id="container">
+    <div id="canvas" #canvasFrame></div>
+    <div id="gameInfo">
+        <p>房间号：<span id="roomId"></span></p>
+        <div id="beforeStart">
+            <p class="hint glimmer" id="prepare">按 Enter 准备游戏</p>
+            <p>房主：<span id="host"></span></p>
+            <p>当前准备人数：<span id="hasPrepared">0</span>/<span id="allMembers">0</span></p>
+        </div>
+        <div id="afterStart">
+            <p>剩余时间: <span id="time" class="hint">0</span></p>
+            <p>当前得分：<span id="score" class="hint">0</span></p>
+            <p>场景垃圾数：<span id="trashNum">0</span></p>
+            <p>剩余提示数量：<span id="hintsNum">0</span></p>
+        </div>
+    </div>
+
+    <div id="oprPrompt" class="prompt">按 Q 投放垃圾</div>
+    <div id="statusPrompt" class="prompt hint"></div>
+    <div id="secondPrompt" class="prompt hint"></div>
+    <div id="loading">场景加载中...</div>
+    <div id="rankContainer">
+        <p>本次排名</p>
+        <div id="rank"> </div>
+    </div>
+
+    <div id="inputBox">
+        <input type="text" id="input" />
+        <button id="emoji">（＾∀＾）</button>
+        <button id="send">发送</button>
+        <div id="emojis">
+            <img src="/api/emojis/1.jpg" id="emoji1" alt="emoji1" />
+            <img src="/api/emojis/2.jpg" id="emoji2" alt="emoji2" />
+            <img src="/api/emojis/3.jpg" id="emoji3" alt="emoji3" />
+        </div>
+    </div>
+</div>

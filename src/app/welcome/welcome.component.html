@@ -1,0 +1,148 @@
+<div class="inner-content">
+    <nz-tabset>
+        <nz-tab [nzTitle]="allRoomsTitleTemplate">
+            <ng-template #allRoomsTitleTemplate>
+                <i nz-icon nzType="bank" nzTheme="outline"></i> 房间大厅
+            </ng-template>
+            <div *ngIf="rooms">
+                <nz-list class="list">
+                    <nz-list-item *ngFor="
+              let room of rooms.slice(
+                (currPageIndex - 1) * pageSize,
+                currPageIndex * pageSize
+              );
+              index as i
+            ">
+                        <ng-container>
+                            <nz-list-item-meta [nzDescription]="'房间 ' + room.roomId">
+                                <nz-list-item-meta-title>
+                                    房主：{{ room.roomOwner }}
+                                </nz-list-item-meta-title>
+                            </nz-list-item-meta>
+                            <span class="content-span">当前玩家人数：{{ room.playerInfos.length }}</span
+              >
+              <span class="content-span"
+                >状态：{{ this.parseStatus(room.status) }}</span
+              >
+              <ul nz-list-item-actions>
+                <nz-list-item-action
+                  ><a (click)="joinRoom(room.roomId)" *ngIf="room.status == 1"
+                    >加入</a
+                  ></nz-list-item-action
+                >
+              </ul>
+            </ng-container>
+          </nz-list-item>
+        </nz-list>
+        <br />
+        <nz-pagination
+          [(nzPageIndex)]="currPageIndex"
+          [(nzPageSize)]="pageSize"
+          [(nzTotal)]="rooms.length"
+        ></nz-pagination>
+      </div>
+      <div *ngIf="rooms && rooms.length == 0">当前没有房间，快去创建一个吧！</div>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="roomTitleTemplate">
+      <ng-template #roomTitleTemplate>
+        <i nz-icon nzType="search" nzTheme="outline"></i>
+        搜索房间
+      </ng-template>
+      <h3 nz-typography>搜索房间</h3>
+      <nz-spin [nzSpinning]="isRoomFormSpinning">
+        <form
+          nz-form
+          [formGroup]="roomForm"
+          class="form"
+          (ngSubmit)="submitRoomForm()"
+        >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="请输入要查找的房间 ID">
+              <nz-form-label nzFor="roomId">房间 ID</nz-form-label>
+              <nz-input-number
+                formControlName="roomId"
+                [nzMin]="0"
+                nzPlaceHolder="房间 ID"
+              ></nz-input-number>
+            </nz-form-control>
+          </nz-form-item>
+          <button
+            nz-button
+            class="form-button form-margin"
+            [nzType]="'primary'"
+            [disabled]="!roomForm.valid"
+          >
+            搜索房间
+          </button>
+        </form>
+      </nz-spin>
+      <ng-container *ngIf="this.currRoom.roomId != -1">
+        <nz-descriptions nzTitle="房间详情" style="max-width: 50%">
+          <nz-descriptions-item nzTitle="房间 ID">{{
+            currRoom.roomId
+          }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="房主">{{
+            currRoom.roomOwner
+          }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="当前玩家人数">{{
+            currRoom.playerInfos.length
+          }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="状态">{{
+            this.parseStatus(currRoom.status)
+          }}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="操作">
+            <a (click)="joinRoom(currRoom.roomId)" *ngIf="currRoom.status == 1"
+              >加入</a
+            >
+          </nz-descriptions-item>
+        </nz-descriptions>
+      </ng-container>
+    </nz-tab>
+
+    <nz-tab [nzTitle]="newRoomTitleTemplate">
+      <ng-template #newRoomTitleTemplate>
+        <i nz-icon nzType="plus-circle" nzTheme="outline"></i>
+        创建房间
+      </ng-template>
+      <h3 nz-typography>创建房间</h3>
+      <nz-spin [nzSpinning]="isNewRoomFormSpinning">
+        <form
+          nz-form
+          [formGroup]="newRoomForm"
+          class="form"
+          (ngSubmit)="submitNewRoomForm()"
+        >
+          <nz-form-item>
+            <nz-form-control nzErrorTip="请选择游戏场景">
+              <nz-form-label nzFor="sid">场景</nz-form-label>
+              <nz-radio-group nzButtonStyle="solid" formControlName="sid">
+                <label nz-radio-button nzValue="1">简约金属</label>
+                <!-- 暂时的占位场景 -->
+                <!-- <label>敬请期待</label> -->
+                <!-- <label nz-radio-button nzValue="3">场景三</label> -->
+              </nz-radio-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="请选择提示数量">
+              <nz-form-label nzFor="hintsNum">提示数量</nz-form-label>
+              <nz-input-number
+                formControlName="hintsNum"
+                [nzMin]="0"
+                nzPlaceHolder="提示数量"
+              ></nz-input-number>
+            </nz-form-control>
+          </nz-form-item>
+          <button
+            nz-button
+            class="form-button form-margin"
+            [nzType]="'primary'"
+            [disabled]="!newRoomForm.valid"
+          >
+            创建房间
+          </button>
+        </form>
+      </nz-spin>
+    </nz-tab>
+  </nz-tabset>
